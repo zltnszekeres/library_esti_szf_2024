@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Book;
 use Illuminate\Http\Request;
 
 class BookController extends Controller
@@ -12,6 +13,7 @@ class BookController extends Controller
     public function index()
     {
         //
+        return Book::all();
     }
 
     /**
@@ -20,6 +22,9 @@ class BookController extends Controller
     public function store(Request $request)
     {
         //
+        $record = new Book();
+        $record->fill($request->all());
+        $record->save();
     }
 
     /**
@@ -28,6 +33,8 @@ class BookController extends Controller
     public function show(string $id)
     {
         //
+        return Book::find($id);
+
     }
 
     /**
@@ -36,6 +43,12 @@ class BookController extends Controller
     public function update(Request $request, string $id)
     {
         //
+        $record =  Book::find($id);
+        $record->fill($request->all());
+        $record->save();
+
+
+
     }
 
     /**
@@ -44,5 +57,7 @@ class BookController extends Controller
     public function destroy(string $id)
     {
         //
+
+        Book::find($id)->delete();
     }
 }
